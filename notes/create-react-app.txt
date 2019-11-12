@@ -1,0 +1,23 @@
+create-react-app
+	uses:
+		node.js:
+		npm: package manager
+
+	comes with:
+		build-step:
+			webpack/babel
+			modern js
+			jsx
+			min/obs/hash
+		testing:
+			jest
+		dev mode server
+			build in mem
+			hot [state-preseving] reload
+
+
+gut app1
+	kill manifest.json
+
+
+npx creat-react-app --typescript

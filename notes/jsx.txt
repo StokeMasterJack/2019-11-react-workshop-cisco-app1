@@ -1,0 +1,33 @@
+html class attribute:
+    className in jsx
+
+To embed a JS expression in JSX (in html), use curly braces:
+    <span>{x}</span>
+    <span>{3}</span>
+    <span>{3 + 3}</span>
+    <span>{p.firstName}</span>
+    <span> {3 > 10} </span>           will render nothing
+    <span>{String(3 > 10)}</span>
+    <span>{3 < 10}</span>
+
+    Normally js expressions to be rendered should resolve to:
+        a string
+        a number
+        a js expression that returns null or false will not be rendered
+            <span> {3 > 10} </span> renders <span>  </span>
+        curly js expressions are not only used to render something
+            they are also used in attribute values
+            in that case a false or null may be more appropriate
+
+inline style:
+    <div style={ { } } />
+    in html style attribute is a string
+    in jsx style property is:
+        an object of type CSSProperties
+        css properties are js properties
+        css property names are camelCase
+        why do we need to curlies:
+            Outer curlies: {  }
+                jsx: js expression inside
+            Inner curlies:
+                js: js object literal

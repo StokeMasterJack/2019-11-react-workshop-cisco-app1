@@ -1,0 +1,9 @@
+css-in-js
+
+1. inline styles
+    perf issues
+    @hover can't do in inline css
+        eternal css
+        css-in-js lib
+
+2. css-in-js libs
