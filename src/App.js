@@ -1,47 +1,55 @@
-import React from 'react';
+import React, {useState} from 'react';
+import {RedPage} from "./RedPage";
+import {BluePage} from "./BluePage";
+import {ListPage} from "./ListPage";
 
-function Red({suffix, bg}) {
-    const bg1 = bg ? bg : 'yellow';
-    const suffix1 = suffix ? suffix : ' MD';
-
-    const bg2 = bg || 'pink';
-    return <div style={{color: 'red', backgroundColor: bg2}}>
-        Red {suffix1}
-    </div>;
-}
-
-function Blue() {
-    return <div style={{color: 'blue', backgroundColor: '#EEEEEE'}}>
-        Blue
-    </div>;
-}
 
 function ChosePage({pageName}) {
     if (pageName === 'redPage') {
-        return <div>
-            <h1>Red Page</h1>
-            <Red bg='lightGreen' suffix='DDS'/>
-            <Red bg={'cyan'} suffix='Dude Man'/>
-            <Red/>
-        </div>;
+        return <RedPage/>;
     } else if (pageName === 'bluePage') {
-        return <div>
-            <h1>Blue Page</h1>
-            <Blue/>
-            <Blue/>
-            <Blue/>
-        </div>;
+        return <BluePage/>;
+    } else if (pageName === 'listPage') {
+        return <ListPage nums={[{id:1,val:3}, {id:2,val:5}, {id:3,val:5}]}/>;
     } else {
         return <div>Bad pageName {pageName}</div>;
     }
 
 }
 
-function CButton({children}) {
-    return <button style={{margin: '.5rem', color: 'darkRed'}}>{children}</button>;
+function CButton(props) {
+    return <button  {...props} style={{margin: '.5rem', color: 'darkRed'}}>
+        {props.children}
+    </button>;
 }
 
-function ButtonBar() {
+function ButtonBar1({setPageName}) {
+
+    const style = {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        top: 0,
+        left: 0,
+        right: 0,
+        position: 'absolute',
+        margin: 0,
+        backgroundColor: '#DDDDDD'
+    };
+
+    return <div style={style}>
+        <CButton onClick={() => setPageName('redPage')}>Red</CButton>
+        <CButton onClick={() => setPageName('bluePage')}>Blue</CButton>
+        <CButton onClick={() => setPageName('listPage')}>List</CButton>
+    </div>;
+}
+
+function ButtonBar2({setPageName}) {
+
+    const onClick = (event) => {
+        const pageName = event.target.name;
+        setPageName(pageName);
+    };
 
     const style = {
         display: 'flex',
@@ -52,24 +60,31 @@ function ButtonBar() {
         right: 0,
         position: 'absolute',
         margin: 0,
-        backgroundColor: '#CCCCCC'
+        backgroundColor: '#EEEEEE'
     };
 
     return <div style={style}>
-        <CButton>Red</CButton>
-        <CButton>Blue</CButton>
+        <CButton name='redPage' onClick={onClick}>Red</CButton>
+        <CButton name='bluePage' onClick={onClick}>Blue</CButton>
+        <CButton name='listPage' onClick={onClick}>List</CButton>
     </div>;
 }
 
-function App() {
-    return <div>
-        App1
+
+function mkInitState() {
+    return 'redPage';
+}
+
+export function App() {
+
+    const [pageName, setPageName] = useState(mkInitState);
+
+    return <div style={{paddingTop:'2.2rem'}}>
+        <h1>App1</h1>
         <div>
-            <ChosePage pageName={'bluePage'}/>
-            <ButtonBar/>
+            <ChosePage pageName={pageName}/>
+            <ButtonBar1 setPageName={setPageName}/>
+            <ButtonBar2 setPageName={setPageName}/>
         </div>
     </div>;
 }
-
-
-export default App;

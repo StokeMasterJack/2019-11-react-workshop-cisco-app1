@@ -1,0 +1,6 @@
+const {x,y} = props;
+
+const [x,y] = a;
+
+const x = a[0];
+const y = a[1];
